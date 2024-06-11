@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Welcome | TransApp</title>
+<style>
+    body {
+        margin: 0;
+        padding: 0;
+        font-family: Arial, sans-serif;
+        background-color: #f0f0f0;
+    }
+
+    .container {
+        padding: 20px;
+        text-align: center;
+    }
+
+    .welcome-text {
+        font-size: 24px;
+        color: #333;
+        animation-name: fadeInLeft;
+        animation-duration: 1s;
+        animation-fill-mode: both;
+    }
+
+    @keyframes fadeInLeft {
+        from {
+            opacity: 0;
+            transform: translateX(-20px);
+        }
+        to {
+            opacity: 1;
+            transform: translateX(0);
+        }
+    }
+
+    .transcription-image {
+        max-width: 350px;
+        margin-top: 20px;
+    }
+
+    .button-container {
+        display: flex;
+        justify-content: center;
+        margin-top: 20px;
+    }
+
+    .button {
+        display: inline-block;
+        padding: 13px 18px;
+        background-color: #148066; /* Green color */
+        color: #fff;
+        text-decoration: none;
+        border-radius: 5px;
+        margin: 10px;
+        transition: background-color 0.3s ease;
+    }
+
+    .button:hover {
+        background-color: #4ebdab; /* Darker green on hover */
+    }
+</style>
+</head>
+<body>
+<div class="container">
+    <h1 class="welcome-text">Welcome to our Transcription App</h1>
+    <img src="https://digidonar.com/wp-content/uploads/2022/04/images-9-1-1024x1024.png" alt="Transcription Image" class="transcription-image">
+    <div class="button-container">
+        <a href="/login" class="button">Log in</a>
+        <a href="/signup" class="button">Sign up</a>
+    </div>
+</div>
+</body>
+</html>

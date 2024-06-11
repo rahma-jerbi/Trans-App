@@ -1,0 +1,83 @@
+{% extends 'core/base.html' %}
+
+{% block title %}Extract Informations | {% endblock %}
+
+{% block content %}
+<style>
+  .content {
+    margin: 5em; /* Adjust margins as needed */
+  }
+
+  .form-element {
+    margin-bottom: 3em; /* Adjust spacing as needed */
+    font-size: 1.2em; /* Increase font size */
+  }
+
+  .error-message {
+    color: red;
+    font-weight: bold;
+    font-size: 1.2em; /* Increase font size */
+  }
+
+  .results-box {
+    margin-top: 3em;
+    border: 1px solid #ccc;
+    padding: 1.2em;
+    background-color: #f9f9f9;
+    font-size: 1.2em; /* Increase font size */
+  }
+
+  label, h1, h2, p {
+    font-size: 1.2em; /* Increase font size */
+    color: rgb(255, 255, 255); /* Ensure text is black */
+  }
+
+  h3 {
+    font-size: 1em; /* Increase font size */
+    color: rgb(255, 253, 253); /* Ensure text is black */
+  }
+</style>
+<div class="content">
+  <h1>Extract Informations</h1>
+  <br>
+  
+
+  <form action="{% url 'extract_informations' %}" method="post" enctype="multipart/form-data">
+      {% csrf_token %}
+
+    <div class="form-element">
+      <label for="pdf_file">Select PDF file:</label>
+      <input type="file" id="pdf_file" name="pdf_file" accept=".pdf" required>
+      {% if form.pdf_file.errors %}
+        <p class="error-message">Please select a PDF file.</p>
+      {% endif %}
+    </div>
+
+    <div class="form-element">
+      <label for="keywords">Enter keywords (comma separated):</label>
+      <input type="text" id="keywords" name="keywords" placeholder="Comma separated keywords" required>
+      {% if form.keywords.errors %}
+        <p class="error-message">Please enter keywords.</p>
+      {% endif %}
+    </div>
+
+    <div class="form-element">
+      <button type="submit" class="px-5 py-3 rounded-xl text-white bg-teal-800 hover:bg-teal-700">Extract Informations</button>
+    </div>
+  </form>
+
+  {% if message %}
+    <p>{{ message }}</p>
+  {% endif %}
+
+  {% if results %}
+    <div class="results-box">
+      <h2>Extraction Results:</h2>
+      {% for keyword, paragraphs in results.items %}
+        <h3>{{ keyword }}</h3>
+        <textarea rows="10" cols="100">{{ paragraphs|join:"\n" }}</textarea>
+      {% endfor %}
+    </div>
+  {% endif %}
+</div>
+{% endblock %}

@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <title>{% block title %}{% endblock %}TranscriptionApp</title>
+
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    <style>
+      .messages {
+        height: 400px;
+        overflow-y: auto;
+      }
+    </style>
+  </head>
+
+  <body class="bg-teal-600">
+    <nav class="flex items-center justify-between px-4 py-6 bg-teal-800">
+      <div>
+        <a href="{% url 'frontpage' %}" class="text-xl text-white">TranscriptionApp</a>
+      </div>
+      <div class="flex items-center space-x-4">
+        {% if request.user.is_authenticated %}
+          {% if request.path == '/transcriptions/' %}
+            <a href="{% url 'extract_informations' %}" class="px-5 py-3 rounded-xl text-white bg-teal-600 hover:bg-teal-700">Extract Informations</a>
+          {% else %}
+            <a href="{% url 'transcriptions' %}" class="px-5 py-3 rounded-xl text-white bg-teal-600 hover:bg-teal-700">Transcriptions</a>
+          {% endif %}
+          <a href="{% url 'logout' %}" class="px-5 py-3 rounded-xl text-white bg-teal-600 hover:bg-teal-700">Log Out</a>
+        {% else %}
+          <a href="{% url 'login' %}" class="text-white hover:text-gray-200">Log in</a>
+          <a href="{% url 'signup' %}" class="px-5 py-3 rounded-xl text-white bg-teal-600 hover:bg-teal-700">Sign up</a>
+        {% endif %}
+      </div>
+    </nav>
+
+    {% block content %}
+    {% endblock %}
+
+    {% block scripts %}
+    {% endblock %}
+  </body>
+</html>
